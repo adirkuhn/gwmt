@@ -12,7 +12,7 @@ $client = new Google_Client();
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
 $client->setRedirectUri($redirect_uri);
-$client->setScopes(array('email', 'https://www.googleapis.com/auth/webmasters.readonly'));
+$client->setScopes(array('email', 'https://www.googleapis.com/auth/webmasters', 'https://www.googleapis.com/auth/webmasters.readonly'));
 /************************************************
   If we're logging out we just need to clear our
   local access token in this case
@@ -72,7 +72,10 @@ if (isset($authUrl)) {
 
   $sites = $search_console->sites->listSites();
 
-  $query_data = $search_console->urlcrawlerrorscounts->query("http://www.bossajazzbrasil.com/");
+  $filters = new Google_Service_Webmasters_SearchAnalyticsQueryRequest();
+  $filters->setStartDate("2015-07-01");
+  $filters->setEndDate("2015-07-27");
+  $query_data = $search_console->searchanalytics->query("http://www.guardatudo.com.br/", $filters);
 
   echo "<pre>";
   var_dump($sites);

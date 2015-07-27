@@ -3,7 +3,7 @@
     "description": "Google Webmaster Tools data extraction",
     "require": {
         "php": ">=5.3",
-        "google/apiclient": "1.0.*@beta",
+        "google/apiclient": "dev-master",
         "symfony/yaml": "2.4.2"
     },
     "require-dev": {
