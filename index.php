@@ -2,7 +2,6 @@
 require_once __DIR__ . "/bootstrap.php";
 
 use Symfony\Component\Yaml\Yaml;
-use Google_Client;
 
 session_start();
 
@@ -13,7 +12,7 @@ $client = new Google_Client();
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
 $client->setRedirectUri($redirect_uri);
-$client->setScopes('email');
+$client->setScopes(array('email', 'https://www.googleapis.com/auth/webmasters.readonly'));
 /************************************************
   If we're logging out we just need to clear our
   local access token in this case
@@ -67,7 +66,21 @@ if (isset($authUrl)) {
   echo "<a class='login' href='" . $authUrl . "'>Connect Me!</a>";
 } else {
   echo "<a class='logout' href='?logout'>Logout</a>";
+
+
+  $search_console = new Google_Service_Webmasters($client);
+
+  $sites = $search_console->sites->listSites();
+
+  $query_data = $search_console->urlcrawlerrorscounts->query("http://www.bossajazzbrasil.com/");
+
+  echo "<pre>";
+  var_dump($sites);
+  var_dump($query_data);
 }
+
+
+
 ?>
   </div>
 
