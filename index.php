@@ -8,7 +8,7 @@ session_start();
 
 $client_id = '233505435139-8coprarurh9s56ijp7rsml6jtcl8osuu.apps.googleusercontent.com';
 $client_secret = 'sAoknq0OsOQez8qd1nxZ2APH';
-$redirect_uri = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+echo $redirect_uri = "http://localhost:8080/";
 $client = new Google_Client();
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
@@ -30,7 +30,7 @@ if (isset($_REQUEST['logout'])) {
 if (isset($_GET['code'])) {
   $client->authenticate($_GET['code']);
   $_SESSION['access_token'] = $client->getAccessToken();
-  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+  echo $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
   header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
 }
 /************************************************
